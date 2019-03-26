@@ -36,7 +36,7 @@ import javax.xml.transform.Result;
 public class JsonStreamXMLWriter
 {
     
-    public static String XPATH_FUNCTIONS_NS = "http://www.w3.org/2005/xpath-functions";
+    public static final String XPATH_FUNCTIONS_NS = "http://www.w3.org/2005/xpath-functions";
 
     public static final XMLOutputFactory xof = XMLOutputFactory.newInstance();
     
