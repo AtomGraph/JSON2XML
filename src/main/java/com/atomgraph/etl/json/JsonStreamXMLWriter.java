@@ -167,6 +167,7 @@ public class JsonStreamXMLWriter
                     }
                     getWriter().writeCharacters("false");
                     getWriter().writeEndElement();
+                break;
                 case VALUE_TRUE:
                     getWriter().writeStartElement(XPATH_FUNCTIONS_NS, "boolean");
                     if (keyName != null)
@@ -179,7 +180,7 @@ public class JsonStreamXMLWriter
                 break;
                 case KEY_NAME:
                     keyName = getParser().getString();
-                    break;
+                break;
                 case VALUE_STRING:
                     getWriter().writeStartElement(XPATH_FUNCTIONS_NS, "string");
                     if (keyName != null)
