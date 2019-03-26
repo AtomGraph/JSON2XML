@@ -9,7 +9,7 @@ JSON2XML enables JSON transformation with XSLT even without having an XSLT 3.0 p
 
     mvn clean install
 
-That should produce an executable JAR file `target/csv2rdf-1.0.0-SNAPSHOT-jar-with-dependencies.jar` in which dependency libraries will be included.
+That should produce an executable JAR file `target/json2xml-1.0.0-SNAPSHOT-jar-with-dependencies.jar` in which dependency libraries will be included.
 
 ## Usage
 
