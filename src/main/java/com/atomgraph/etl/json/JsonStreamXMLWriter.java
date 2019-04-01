@@ -37,7 +37,6 @@ public class JsonStreamXMLWriter
 {
     
     public static final String XPATH_FUNCTIONS_NS = "http://www.w3.org/2005/xpath-functions";
-
     public static final XMLOutputFactory xof = XMLOutputFactory.newInstance();
     
     static
@@ -210,12 +209,13 @@ public class JsonStreamXMLWriter
                     }
                 break;
             }
+            
+            getWriter().flush();
         }
 
         getWriter().writeEndDocument();
 
-        getWriter().flush();
-        getWriter().close();
+        getParser().close();
     }
 
     protected JsonParser getParser()
