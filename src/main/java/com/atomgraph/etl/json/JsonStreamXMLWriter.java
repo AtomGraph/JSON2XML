@@ -37,11 +37,11 @@ public class JsonStreamXMLWriter
 {
     
     public static final String XPATH_FUNCTIONS_NS = "http://www.w3.org/2005/xpath-functions";
-    public static final XMLOutputFactory xof = XMLOutputFactory.newInstance();
+    private static final XMLOutputFactory XOF = XMLOutputFactory.newInstance();
     
     static
     {
-        xof.setProperty(XMLOutputFactory.IS_REPAIRING_NAMESPACES, true);
+        XOF.setProperty(XMLOutputFactory.IS_REPAIRING_NAMESPACES, true);
     }
     
     private final JsonParser parser;
@@ -125,13 +125,33 @@ public class JsonStreamXMLWriter
 
     public void convert() throws XMLStreamException
     {
-        getWriter().writeStartDocument();
-        getWriter().setDefaultNamespace(XPATH_FUNCTIONS_NS);
+        convert(getWriter());
+    }
+    
+    public void convert(XMLStreamWriter writer) throws XMLStreamException
+    {
+        convert(getParser(), writer);
+    }
 
+    public static void convert(JsonParser parser, XMLStreamWriter writer) throws XMLStreamException
+    {
+        writer.writeStartDocument();
+        writer.setDefaultNamespace(XPATH_FUNCTIONS_NS);
+
+        write(parser, writer);
+
+        writer.writeEndDocument();
+        writer.flush();
+
+        parser.close();
+    }
+
+    public static void write(JsonParser parser, XMLStreamWriter writer) throws XMLStreamException
+    {
         String keyName = null;
-        while (getParser().hasNext())
+        while (parser.hasNext())
         {
-            JsonParser.Event event = getParser().next();
+            JsonParser.Event event = parser.next();
 
             switch(event)
             {
@@ -139,85 +159,81 @@ public class JsonStreamXMLWriter
                     writer.writeStartElement(XPATH_FUNCTIONS_NS, "array");
                     if (keyName != null)
                     {
-                        getWriter().writeAttribute("key", keyName);
+                        writer.writeAttribute("key", keyName);
                         keyName = null;
                     }
                 break;
                 case END_ARRAY:
-                    getWriter().writeEndElement();
+                    writer.writeEndElement();
                 break;
                 case START_OBJECT:
                     writer.writeStartElement(XPATH_FUNCTIONS_NS, "map");
                     if (keyName != null)
                     {
-                        getWriter().writeAttribute("key", keyName);
+                        writer.writeAttribute("key", keyName);
                         keyName = null;
                     }
                 break;
                 case END_OBJECT:
-                    getWriter().writeEndElement();
+                    writer.writeEndElement();
                 break;
                 case VALUE_FALSE:
-                    getWriter().writeStartElement(XPATH_FUNCTIONS_NS, "boolean");
+                    writer.writeStartElement(XPATH_FUNCTIONS_NS, "boolean");
                     if (keyName != null)
                     {
-                        getWriter().writeAttribute("key", keyName);
+                        writer.writeAttribute("key", keyName);
                         keyName = null;
                     }
-                    getWriter().writeCharacters("false");
-                    getWriter().writeEndElement();
+                    writer.writeCharacters("false");
+                    writer.writeEndElement();
                 break;
                 case VALUE_TRUE:
-                    getWriter().writeStartElement(XPATH_FUNCTIONS_NS, "boolean");
+                    writer.writeStartElement(XPATH_FUNCTIONS_NS, "boolean");
                     if (keyName != null)
                     {
-                        getWriter().writeAttribute("key", keyName);
+                        writer.writeAttribute("key", keyName);
                         keyName = null;
                     }
-                    getWriter().writeCharacters("true");
-                    getWriter().writeEndElement();
+                    writer.writeCharacters("true");
+                    writer.writeEndElement();
                 break;
                 case KEY_NAME:
-                    keyName = getParser().getString();
+                    keyName = parser.getString();
                 break;
                 case VALUE_STRING:
-                    getWriter().writeStartElement(XPATH_FUNCTIONS_NS, "string");
+                    writer.writeStartElement(XPATH_FUNCTIONS_NS, "string");
                     if (keyName != null)
                     {
-                        getWriter().writeAttribute("key", keyName);
+                        writer.writeAttribute("key", keyName);
                         keyName = null;
                     }
-                    getWriter().writeCharacters(getParser().getString());
-                    getWriter().writeEndElement();
+                    writer.writeCharacters(parser.getString());
+                    writer.writeEndElement();
                 break;
                 case VALUE_NUMBER:
-                    getWriter().writeStartElement(XPATH_FUNCTIONS_NS, "number");
+                    writer.writeStartElement(XPATH_FUNCTIONS_NS, "number");
                     if (keyName != null)
                     {
-                        getWriter().writeAttribute("key", keyName);
+                        writer.writeAttribute("key", keyName);
                         keyName = null;
                     }
-                    getWriter().writeCharacters(getParser().getString());
-                    getWriter().writeEndElement();
+                    writer.writeCharacters(parser.getString());
+                    writer.writeEndElement();
                 break;
                 case VALUE_NULL:
-                    getWriter().writeEmptyElement(XPATH_FUNCTIONS_NS, "null");
+                    writer.writeEmptyElement(XPATH_FUNCTIONS_NS, "null");
                     if (keyName != null)
                     {
-                        getWriter().writeAttribute("key", keyName);
+                        writer.writeAttribute("key", keyName);
                         keyName = null;
                     }
                 break;
             }
             
-            getWriter().flush();
+            writer.flush();
         }
-
-        getWriter().writeEndDocument();
-
-        getParser().close();
     }
-
+    
     protected JsonParser getParser()
     {
         return parser;
@@ -230,7 +246,7 @@ public class JsonStreamXMLWriter
 
     protected static XMLOutputFactory getXMLOutputFactory()
     {
-        return xof;
+        return XOF;
     }
     
 }

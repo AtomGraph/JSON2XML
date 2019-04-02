@@ -52,7 +52,7 @@ JSON data in `city-distances.json`:
 
 Execution from shell:
 
-     cat city-distances.json | java -jar json2xml-1.0.0-SNAPSHOT-jar-with-dependencies.jar > city-distances.xml
+     cat city-distances.json | java -jar json2xml-1.0.1-SNAPSHOT-jar-with-dependencies.jar > city-distances.xml
 
 Output in `city-distances.xml` (indented for clarity):
 
