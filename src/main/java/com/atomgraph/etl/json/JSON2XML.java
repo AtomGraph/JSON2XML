@@ -39,7 +39,7 @@ public class JSON2XML
         {
             System.out.println("JSON input: stdin");
             System.out.println("Example: cat sample.json | java -jar json2xml-1.0.0-SNAPSHOT-jar-with-dependencies.jar > sample.xml");
-            System.exit(-1);
+            System.exit(1);
         }
         
         try (InputStreamReader reader = new InputStreamReader(json, StandardCharsets.UTF_8))
