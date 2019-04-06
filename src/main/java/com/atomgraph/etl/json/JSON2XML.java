@@ -15,11 +15,13 @@
  */
 package com.atomgraph.etl.json;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import javax.xml.stream.XMLStreamException;
 
@@ -42,7 +44,7 @@ public class JSON2XML
             System.exit(1);
         }
         
-        try (InputStreamReader reader = new InputStreamReader(json, StandardCharsets.UTF_8))
+        try (Reader reader = new BufferedReader(new InputStreamReader(json, StandardCharsets.UTF_8)))
         {
             new JsonStreamXMLWriter(reader, new BufferedWriter(new OutputStreamWriter(System.out))).convert();
         }
