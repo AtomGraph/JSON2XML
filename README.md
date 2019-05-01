@@ -58,9 +58,9 @@ Java execution from shell:
 
 Alternatively, Docker execution from shell:
 
-    cat city-distances.json | docker run -i -a stdin -a stdout -a stderr atomgraph/json2xml
+    cat city-distances.json | docker run -i -a stdin -a stdout -a stderr atomgraph/json2xml > city-distances.xml
 
-Note that you need to [bind](https://docs.docker.com/engine/reference/commandline/run/#attach-to-stdinstdoutstderr--a) `stdin`/`stdout`/`stderr` when running Docker.
+Note that you need to [bind](https://docs.docker.com/engine/reference/commandline/run/#attach-to-stdinstdoutstderr--a) `stdin`/`stdout`/`stderr` when running JSON2XML as a Docker container.
 
 Output in `city-distances.xml` (indented for clarity):
 
