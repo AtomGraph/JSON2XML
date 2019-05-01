@@ -39,8 +39,8 @@ public class JSON2XML
         
         if (json.available() == 0)
         {
-            System.out.println("JSON input: stdin");
-            System.out.println("Example: cat sample.json | java -jar json2xml-1.0.0-SNAPSHOT-jar-with-dependencies.jar > sample.xml");
+            System.err.println("JSON input: stdin");
+            System.err.println("Example: cat sample.json | java -jar json2xml-1.0.0-SNAPSHOT-jar-with-dependencies.jar > sample.xml");
             System.exit(1);
         }
         
