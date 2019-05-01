@@ -15,7 +15,7 @@ That should produce an executable JAR file `target/json2xml-1.0.0-SNAPSHOT-jar-w
 
 The JSON data is read from `stdin`, UTF-8 encoding is expected. The resulting XML data is written to `stdout`.
 
-Docker image is in the works.
+JSON2XML is available as a `.jar` as well as a Docker image [atomgraph/json2xml](https://hub.docker.com/r/atomgraph/json2xml).
 
 ## Example
 
@@ -52,9 +52,15 @@ JSON data in `city-distances.json`:
 }
 ```
 
-Execution from shell:
+Java execution from shell:
 
-     cat city-distances.json | java -jar json2xml-1.0.1-SNAPSHOT-jar-with-dependencies.jar > city-distances.xml
+    cat city-distances.json | java -jar json2xml-1.0.1-SNAPSHOT-jar-with-dependencies.jar > city-distances.xml
+
+Alternatively, Docker execution from shell:
+
+    cat city-distances.json | docker run -i -a stdin -a stdout -a stderr atomgraph/json2xml
+
+Note that you need to [bind](https://docs.docker.com/engine/reference/commandline/run/#attach-to-stdinstdoutstderr--a) `stdin`/`stdout`/`stderr` when running Docker.
 
 Output in `city-distances.xml` (indented for clarity):
 
