@@ -21,34 +21,36 @@ Docker image is in the works.
 
 JSON data in `city-distances.json`:
 
-    {
-      "desc"    : "Distances between several cities, in kilometers.",
-      "updated" : "2014-02-04T18:50:45",
-      "uptodate": true,
-      "author"  : null,
-      "cities"  : {
-        "Brussels": [
-          {"to": "London",    "distance": 322},
-          {"to": "Paris",     "distance": 265},
-          {"to": "Amsterdam", "distance": 173}
-        ],
-        "London": [
-          {"to": "Brussels",  "distance": 322},
-          {"to": "Paris",     "distance": 344},
-          {"to": "Amsterdam", "distance": 358}
-        ],
-        "Paris": [
-          {"to": "Brussels",  "distance": 265},
-          {"to": "London",    "distance": 344},
-          {"to": "Amsterdam", "distance": 431}
-        ],
-        "Amsterdam": [
-          {"to": "Brussels",  "distance": 173},
-          {"to": "London",    "distance": 358},
-          {"to": "Paris",     "distance": 431}
-        ]
-      }
-    }
+```json
+{
+  "desc"    : "Distances between several cities, in kilometers.",
+  "updated" : "2014-02-04T18:50:45",
+  "uptodate": true,
+  "author"  : null,
+  "cities"  : {
+    "Brussels": [
+      {"to": "London",    "distance": 322},
+      {"to": "Paris",     "distance": 265},
+      {"to": "Amsterdam", "distance": 173}
+    ],
+    "London": [
+      {"to": "Brussels",  "distance": 322},
+      {"to": "Paris",     "distance": 344},
+      {"to": "Amsterdam", "distance": 358}
+    ],
+    "Paris": [
+      {"to": "Brussels",  "distance": 265},
+      {"to": "London",    "distance": 344},
+      {"to": "Amsterdam", "distance": 431}
+    ],
+    "Amsterdam": [
+      {"to": "Brussels",  "distance": 173},
+      {"to": "London",    "distance": 358},
+      {"to": "Paris",     "distance": 431}
+    ]
+  }
+}
+```
 
 Execution from shell:
 
@@ -56,71 +58,73 @@ Execution from shell:
 
 Output in `city-distances.xml` (indented for clarity):
 
-    <?xml version="1.0" ?>
-    <map xmlns="http://www.w3.org/2005/xpath-functions">
-      <string key="desc">Distances between several cities, in kilometers.</string>
-      <string key="updated">2014-02-04T18:50:45</string>
-      <boolean key="uptodate">true</boolean>
-      <null key="author"/>
-      <map key="cities">
-        <array key="Brussels">
-          <map>
-            <string key="to">London</string>
-            <number key="distance">322</number>
-          </map>
-          <map>
-            <string key="to">Paris</string>
-            <number key="distance">265</number>
-          </map>
-          <map>
-            <string key="to">Amsterdam</string>
-            <number key="distance">173</number>
-          </map>
-        </array>
-        <array key="London">
-          <map>
-            <string key="to">Brussels</string>
-            <number key="distance">322</number>
-          </map>
-          <map>
-            <string key="to">Paris</string>
-            <number key="distance">344</number>
-          </map>
-          <map>
-            <string key="to">Amsterdam</string>
-            <number key="distance">358</number>
-          </map>
-        </array>
-        <array key="Paris">
-          <map>
-            <string key="to">Brussels</string>
-            <number key="distance">265</number>
-          </map>
-          <map>
-            <string key="to">London</string>
-            <number key="distance">344</number>
-          </map>
-          <map>
-            <string key="to">Amsterdam</string>
-            <number key="distance">431</number>
-          </map>
-        </array>
-        <array key="Amsterdam">
-          <map>
-            <string key="to">Brussels</string>
-            <number key="distance">173</number>
-          </map>
-          <map>
-            <string key="to">London</string>
-            <number key="distance">358</number>
-          </map>
-          <map>
-            <string key="to">Paris</string>
-            <number key="distance">431</number>
-          </map>
-        </array>
+```xml
+<?xml version="1.0" ?>
+<map xmlns="http://www.w3.org/2005/xpath-functions">
+  <string key="desc">Distances between several cities, in kilometers.</string>
+  <string key="updated">2014-02-04T18:50:45</string>
+  <boolean key="uptodate">true</boolean>
+  <null key="author"/>
+  <map key="cities">
+    <array key="Brussels">
+      <map>
+        <string key="to">London</string>
+        <number key="distance">322</number>
       </map>
-    </map>
+      <map>
+        <string key="to">Paris</string>
+        <number key="distance">265</number>
+      </map>
+      <map>
+        <string key="to">Amsterdam</string>
+        <number key="distance">173</number>
+      </map>
+    </array>
+    <array key="London">
+      <map>
+        <string key="to">Brussels</string>
+        <number key="distance">322</number>
+      </map>
+      <map>
+        <string key="to">Paris</string>
+        <number key="distance">344</number>
+      </map>
+      <map>
+        <string key="to">Amsterdam</string>
+        <number key="distance">358</number>
+      </map>
+    </array>
+    <array key="Paris">
+      <map>
+        <string key="to">Brussels</string>
+        <number key="distance">265</number>
+      </map>
+      <map>
+        <string key="to">London</string>
+        <number key="distance">344</number>
+      </map>
+      <map>
+        <string key="to">Amsterdam</string>
+        <number key="distance">431</number>
+      </map>
+    </array>
+    <array key="Amsterdam">
+      <map>
+        <string key="to">Brussels</string>
+        <number key="distance">173</number>
+      </map>
+      <map>
+        <string key="to">London</string>
+        <number key="distance">358</number>
+      </map>
+      <map>
+        <string key="to">Paris</string>
+        <number key="distance">431</number>
+      </map>
+    </array>
+  </map>
+</map>
+```
 
 ## Dependencies
 
