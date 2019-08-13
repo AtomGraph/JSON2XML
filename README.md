@@ -9,13 +9,13 @@ JSON2XML enables JSON transformation with XSLT even without having an XSLT 3.0 p
 
     mvn clean install
 
-That should produce an executable JAR file `target/json2xml-1.0.0-SNAPSHOT-jar-with-dependencies.jar` in which dependency libraries will be included.
+That should produce an executable JAR file `target/json2xml-1.0.2-SNAPSHOT-jar-with-dependencies.jar` in which dependency libraries will be included.
 
 ## Usage
 
 The JSON data is read from `stdin`, UTF-8 encoding is expected. The resulting XML data is written to `stdout`.
 
-JSON2XML is available as a `.jar` as well as a Docker image [atomgraph/json2xml](https://hub.docker.com/r/atomgraph/json2xml).
+JSON2XML is available as a `.jar` as well as a Docker image [atomgraph/json2xml](https://hub.docker.com/r/atomgraph/json2xml) (recommended).
 
 ## Example
 
