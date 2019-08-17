@@ -6,7 +6,7 @@
 
     <groupId>com.atomgraph.etl.json</groupId>
     <artifactId>json2xml</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
 
     <name>JSON2XML</name>

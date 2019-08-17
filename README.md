@@ -9,7 +9,7 @@ JSON2XML enables JSON transformation with XSLT even without having an XSLT 3.0 p
 
     mvn clean install
 
-That should produce an executable JAR file `target/json2xml-1.0.2-SNAPSHOT-jar-with-dependencies.jar` in which dependency libraries will be included.
+That should produce an executable JAR file `target/json2xml-1.0.2-jar-with-dependencies.jar` in which dependency libraries will be included.
 
 ## Usage
 
@@ -134,4 +134,4 @@ Output in `city-distances.xml` (indented for clarity):
 
 ## Dependencies
 
-No third-party dependencies. Only Java packages [`javax.json`](https://docs.oracle.com/javaee/7/api/javax/json/package-summary.html) and [`javax.xml.stream`](https://docs.oracle.com/javase/8/docs/api/index.html?javax/xml/stream/package-summary.html) are used.
+* [javax.json](https://mvnrepository.com/artifact/org.glassfish/javax.json)
