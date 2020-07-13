@@ -40,13 +40,14 @@ public class JSON2XML
         if (json.available() == 0)
         {
             System.err.println("JSON input: stdin");
-            System.err.println("Example: cat sample.json | java -jar json2xml-1.0.0-SNAPSHOT-jar-with-dependencies.jar > sample.xml");
+            System.err.println("Example: cat sample.json | java -jar json2xml-jar-with-dependencies.jar > sample.xml");
             System.exit(1);
         }
         
         try (Reader reader = new BufferedReader(new InputStreamReader(json, StandardCharsets.UTF_8)))
         {
-            new JsonStreamXMLWriter(reader, new BufferedWriter(new OutputStreamWriter(System.out))).convert();
+            new JsonStreamXMLWriter(reader, new BufferedWriter(new OutputStreamWriter(System.out, StandardCharsets.UTF_8))).
+                    convert(StandardCharsets.UTF_8.name(), "1.0");
         }
     }
     

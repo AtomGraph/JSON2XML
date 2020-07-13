@@ -5,6 +5,13 @@ Reads any JSON data and produces [XML Representation of JSON](https://www.w3.org
 
 JSON2XML enables JSON transformation with XSLT even without having an XSLT 3.0 processor. You can simply pre-process the data by having JSON2XML before the transformation, and pipeline it into an XSLT 2.0 stylesheet, for example. That way your stylesheet stays forward compatible with XSLT 3.0, as the XML representation is exactly the same.
 
+## Invalid characters
+
+The JSON input might contain characters (for example, form feed `\f`) which would be invalid in the XML output. The [`json-to-xml()` function](https://www.w3.org/TR/xslt-30/#func-json-to-xml) specifies character escape rules that apply in this case.
+
+JSON2XML currently implements only the default escape rule: 
+> Any characters or codepoints that are not valid XML characters (for example, unpaired surrogates) are passed to the fallback function as described below; in the absence of a fallback function, they are replaced by the Unicode `REPLACEMENT CHARACTER (xFFFD)`.
+
 ## Build
 
     mvn clean install

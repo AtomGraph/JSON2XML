@@ -10,4 +10,4 @@ RUN mvn clean install
 
 ### entrypoint
 
-ENTRYPOINT ["java", "-jar", "target/json2xml-1.0.2-SNAPSHOT-jar-with-dependencies.jar"]
+ENTRYPOINT ["java", "-jar", "target/json2xml-jar-with-dependencies.jar"]

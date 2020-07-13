@@ -6,7 +6,7 @@
 
     <groupId>com.atomgraph.etl.json</groupId>
     <artifactId>json2xml</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <packaging>jar</packaging>
 
     <name>JSON2XML</name>
@@ -52,9 +52,16 @@
             <artifactId>javax.json</artifactId>
             <version>1.1.4</version>
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     
     <build>
+        <finalName>json2xml</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

@@ -37,6 +37,7 @@ public class JsonStreamXMLWriter
 {
     
     public static final String XPATH_FUNCTIONS_NS = "http://www.w3.org/2005/xpath-functions";
+    public static final String REPLACEMENT_CHAR = "\uFFFD";
     private static final XMLOutputFactory XOF = XMLOutputFactory.newInstance();
     
     static
@@ -123,19 +124,18 @@ public class JsonStreamXMLWriter
         this.writer = writer;
     }
 
-    public void convert() throws XMLStreamException
+    public void convert(String encoding, String version) throws XMLStreamException
     {
-        convert(getWriter());
+        convert(getWriter(), encoding, version);
     }
     
-    public void convert(XMLStreamWriter writer) throws XMLStreamException
+    public void convert(XMLStreamWriter writer, String encoding, String version) throws XMLStreamException
     {
-        convert(getParser(), writer);
+        convert(getParser(), writer, encoding, version);
     }
-
-    public static void convert(JsonParser parser, XMLStreamWriter writer) throws XMLStreamException
+    public static void convert(JsonParser parser, XMLStreamWriter writer, String encoding, String version) throws XMLStreamException
     {
-        writer.writeStartDocument();
+        writer.writeStartDocument(encoding, version);
         writer.setDefaultNamespace(XPATH_FUNCTIONS_NS);
 
         write(parser, writer);
@@ -198,7 +198,7 @@ public class JsonStreamXMLWriter
                     writer.writeEndElement();
                 break;
                 case KEY_NAME:
-                    keyName = parser.getString();
+                    keyName = replaceInvalidXMLChars(parser.getString(), REPLACEMENT_CHAR);
                 break;
                 case VALUE_STRING:
                     writer.writeStartElement(XPATH_FUNCTIONS_NS, "string");
@@ -207,7 +207,7 @@ public class JsonStreamXMLWriter
                         writer.writeAttribute("key", keyName);
                         keyName = null;
                     }
-                    writer.writeCharacters(parser.getString());
+                    writer.writeCharacters(replaceInvalidXMLChars(parser.getString(), REPLACEMENT_CHAR));
                     writer.writeEndElement();
                 break;
                 case VALUE_NUMBER:
@@ -217,7 +217,7 @@ public class JsonStreamXMLWriter
                         writer.writeAttribute("key", keyName);
                         keyName = null;
                     }
-                    writer.writeCharacters(parser.getString());
+                    writer.writeCharacters(replaceInvalidXMLChars(parser.getString(), REPLACEMENT_CHAR));
                     writer.writeEndElement();
                 break;
                 case VALUE_NULL:
@@ -232,6 +232,41 @@ public class JsonStreamXMLWriter
             
             writer.flush();
         }
+    }
+    
+    public static String replaceInvalidXMLChars(String text, String replacement)
+    {
+        if (null == text || text.isEmpty()) return text;
+
+        final int len = text.length();
+        char current = 0;
+        int codePoint = 0;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < len; i++)
+        {
+            current = text.charAt(i);
+            boolean surrogate = false;
+            if (Character.isHighSurrogate(current)
+                    && i + 1 < len && Character.isLowSurrogate(text.charAt(i + 1)))
+            {
+                surrogate = true;
+                codePoint = text.codePointAt(i++);
+            }
+            else codePoint = current;
+
+            if ((codePoint == 0x9) || (codePoint == 0xA) || (codePoint == 0xD)
+                    || ((codePoint >= 0x20) && (codePoint <= 0xD7FF))
+                    || ((codePoint >= 0xE000) && (codePoint <= 0xFFFD))
+                    || ((codePoint >= 0x10000) && (codePoint <= 0x10FFFF)))
+            {
+                sb.append(current);
+                if (surrogate)  sb.append(text.charAt(i));
+            }
+            else
+                sb.append(replacement);
+        }
+        
+        return sb.toString();
     }
     
     protected JsonParser getParser()
