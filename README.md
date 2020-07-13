@@ -16,7 +16,7 @@ JSON2XML currently implements only the default escape rule:
 
     mvn clean install
 
-That should produce an executable JAR file `target/json2xml-1.0.2-jar-with-dependencies.jar` in which dependency libraries will be included.
+That should produce an executable JAR file `target/json2xml-jar-with-dependencies.jar` in which dependency libraries will be included.
 
 ## Usage
 
@@ -61,7 +61,7 @@ JSON data in `city-distances.json`:
 
 Java execution from shell:
 
-    cat city-distances.json | java -jar json2xml-1.0.1-SNAPSHOT-jar-with-dependencies.jar > city-distances.xml
+    cat city-distances.json | java -jar json2xml-jar-with-dependencies.jar > city-distances.xml
 
 Alternatively, Docker execution from shell:
 

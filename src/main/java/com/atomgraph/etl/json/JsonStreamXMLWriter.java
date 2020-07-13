@@ -260,7 +260,7 @@ public class JsonStreamXMLWriter
                     || ((codePoint >= 0x10000) && (codePoint <= 0x10FFFF)))
             {
                 sb.append(current);
-                if (surrogate)  sb.append(text.charAt(i));
+                if (surrogate) sb.append(text.charAt(i));
             }
             else
                 sb.append(replacement);
