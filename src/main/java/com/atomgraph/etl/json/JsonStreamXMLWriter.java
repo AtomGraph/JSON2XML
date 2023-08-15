@@ -133,17 +133,19 @@ public class JsonStreamXMLWriter
     {
         convert(getParser(), writer, encoding, version);
     }
+    
     public static void convert(JsonParser parser, XMLStreamWriter writer, String encoding, String version) throws XMLStreamException
     {
-        writer.writeStartDocument(encoding, version);
-        writer.setDefaultNamespace(XPATH_FUNCTIONS_NS);
-
-        write(parser, writer);
-
-        writer.writeEndDocument();
-        writer.flush();
-
-        parser.close();
+        try (parser)
+        {
+            writer.writeStartDocument(encoding, version);
+            writer.setDefaultNamespace(XPATH_FUNCTIONS_NS);
+            
+            write(parser, writer);
+            
+            writer.writeEndDocument();
+            writer.flush();
+        }
     }
 
     public static void write(JsonParser parser, XMLStreamWriter writer) throws XMLStreamException
@@ -155,29 +157,25 @@ public class JsonStreamXMLWriter
 
             switch(event)
             {
-                case START_ARRAY:
+                case START_ARRAY -> {
                     writer.writeStartElement(XPATH_FUNCTIONS_NS, "array");
                     if (keyName != null)
                     {
                         writer.writeAttribute("key", keyName);
                         keyName = null;
                     }
-                break;
-                case END_ARRAY:
-                    writer.writeEndElement();
-                break;
-                case START_OBJECT:
+                }
+                case END_ARRAY -> writer.writeEndElement();
+                case START_OBJECT -> {
                     writer.writeStartElement(XPATH_FUNCTIONS_NS, "map");
                     if (keyName != null)
                     {
                         writer.writeAttribute("key", keyName);
                         keyName = null;
                     }
-                break;
-                case END_OBJECT:
-                    writer.writeEndElement();
-                break;
-                case VALUE_FALSE:
+                }
+                case END_OBJECT -> writer.writeEndElement();
+                case VALUE_FALSE -> {
                     writer.writeStartElement(XPATH_FUNCTIONS_NS, "boolean");
                     if (keyName != null)
                     {
@@ -186,8 +184,8 @@ public class JsonStreamXMLWriter
                     }
                     writer.writeCharacters("false");
                     writer.writeEndElement();
-                break;
-                case VALUE_TRUE:
+                }
+                case VALUE_TRUE -> {
                     writer.writeStartElement(XPATH_FUNCTIONS_NS, "boolean");
                     if (keyName != null)
                     {
@@ -196,11 +194,9 @@ public class JsonStreamXMLWriter
                     }
                     writer.writeCharacters("true");
                     writer.writeEndElement();
-                break;
-                case KEY_NAME:
-                    keyName = replaceInvalidXMLChars(parser.getString(), REPLACEMENT_CHAR);
-                break;
-                case VALUE_STRING:
+                }
+                case KEY_NAME -> keyName = replaceInvalidXMLChars(parser.getString(), REPLACEMENT_CHAR);
+                case VALUE_STRING -> {
                     writer.writeStartElement(XPATH_FUNCTIONS_NS, "string");
                     if (keyName != null)
                     {
@@ -209,8 +205,8 @@ public class JsonStreamXMLWriter
                     }
                     writer.writeCharacters(replaceInvalidXMLChars(parser.getString(), REPLACEMENT_CHAR));
                     writer.writeEndElement();
-                break;
-                case VALUE_NUMBER:
+                }
+                case VALUE_NUMBER -> {
                     writer.writeStartElement(XPATH_FUNCTIONS_NS, "number");
                     if (keyName != null)
                     {
@@ -219,15 +215,15 @@ public class JsonStreamXMLWriter
                     }
                     writer.writeCharacters(replaceInvalidXMLChars(parser.getString(), REPLACEMENT_CHAR));
                     writer.writeEndElement();
-                break;
-                case VALUE_NULL:
+                }
+                case VALUE_NULL -> {
                     writer.writeEmptyElement(XPATH_FUNCTIONS_NS, "null");
                     if (keyName != null)
                     {
                         writer.writeAttribute("key", keyName);
                         keyName = null;
                     }
-                break;
+                }
             }
             
             writer.flush();
