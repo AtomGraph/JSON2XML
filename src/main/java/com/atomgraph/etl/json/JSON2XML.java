@@ -28,7 +28,7 @@ import javax.xml.stream.XMLStreamException;
 /**
  * Main entry point to the conversion.
  * 
- * @author Martynas Jusevičius <martynas@atomgraph.com>
+ * @author Martynas Jusevičius {@literal <martynas@atomgraph.com>}
  */
 public class JSON2XML
 {
@@ -47,7 +47,7 @@ public class JSON2XML
         try (Reader reader = new BufferedReader(new InputStreamReader(json, StandardCharsets.UTF_8)))
         {
             new JsonStreamXMLWriter(reader, new BufferedWriter(new OutputStreamWriter(System.out, StandardCharsets.UTF_8))).
-                    convert(StandardCharsets.UTF_8.name(), "1.0");
+                convert(StandardCharsets.UTF_8.name(), "1.0");
         }
     }
     

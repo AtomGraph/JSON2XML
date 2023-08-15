@@ -31,12 +31,19 @@ import javax.xml.transform.Result;
  * Uses XML representation of JSON defined in XSLT 3.0.
  * 
  * @see <a href="https://www.w3.org/TR/xslt-30/#json">22 Processing JSON Data</a>
- * @author Martynas Jusevičius <martynas@atomgraph.com>
+ * @author Martynas Jusevičius {@literal <martynas@atomgraph.com>}
  */
 public class JsonStreamXMLWriter
 {
     
+    /**
+     * XPath function namespace
+     **/
     public static final String XPATH_FUNCTIONS_NS = "http://www.w3.org/2005/xpath-functions";
+    /**
+     * Fallback replacement character
+     * @see <a href="https://www.w3.org/TR/xslt-30/#func-json-to-xml"><code>json-to-xml</code></a>
+     */
     public static final String REPLACEMENT_CHAR = "\uFFFD";
     private static final XMLOutputFactory XOF = XMLOutputFactory.newInstance();
     
@@ -148,6 +155,13 @@ public class JsonStreamXMLWriter
         }
     }
 
+    /**
+     * Parses JSON and writes XML into a stream.
+     * 
+     * @param parser JSON parser
+     * @param writer XML writer stream
+     * @throws XMLStreamException 
+     */
     public static void write(JsonParser parser, XMLStreamWriter writer) throws XMLStreamException
     {
         String keyName = null;
