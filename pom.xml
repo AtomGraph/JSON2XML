@@ -66,6 +66,13 @@
         </dependency>
     </dependencies>
     
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+    
     <build>
         <finalName>json2xml</finalName>
         <plugins>
@@ -164,10 +171,4 @@
         </profile>
     </profiles>
     
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>
 </project>
