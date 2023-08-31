@@ -18,6 +18,10 @@ JSON2XML currently implements only the default escape rule:
 
 That should produce an executable JAR file `target/json2xml-jar-with-dependencies.jar` in which dependency libraries will be included.
 
+## Maven
+
+Each version is released to the Maven central repository as [`com.atomgraph.etl.json/json2xml`](https://central.sonatype.com/artifact/com.atomgraph.etl.json/json2xml)
+
 ## Usage
 
 The JSON data is read from `stdin`, UTF-8 encoding is expected. The resulting XML data is written to `stdout`.
